@@ -1,10 +1,12 @@
 import { GlobalStyle } from './GlobalStyle';
 import 'modern-normalize';
+import { P } from './P.styled';
 
 export const App = () => {
   return (
     <>
-			<p>Hello</p>
+      <P>Hello</P>
+      <GlobalStyle />
     </>
   );
 };
