@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Contact } from '../Contact/Contact';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 export const ContactList = ({ options }) => {
 	// console.log(options);
