@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
-import { Contact } from './Contact';
-import { nanoid } from 'nanoid';
+import { Contact } from '../Contact/Contact';
 import styled from 'styled-components';
 
-export const ContactList = ({ names }) => {
+export const ContactList = ({ options }) => {
+	// console.log(options);
   return (
     <ul>
-      {names.map(name => (
-        <li key={nanoid()}>
-          <Contact name={name} />
+			{options.map(({ name, number, id}) => (
+        <li key={id}>
+				<Contact name={name} number={ number} />
         </li>
       ))}
     </ul>
@@ -16,5 +16,9 @@ export const ContactList = ({ names }) => {
 };
 
 ContactList.propTypes = {
-  names: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
 };

@@ -4,28 +4,42 @@ import 'modern-normalize';
 
 import { PhonebookForm } from './PhonebookForm/Phonebook';
 import { ContactList } from './ContactList/ContactList';
+import { Filter } from './Filter/Filter';
 
 export class App extends Component {
   state = {
-    contacts: [],
-    name: '',
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
+    // name: '',
+    // number: '',
   };
 
-  handleSubmit = name => {
+  handleSubmit = (name, number, id) => {
     this.setState(prevState => ({
       name: { name },
-      contacts: [...prevState.contacts,  name],
+      number: { number },
+      contacts: [...prevState.contacts, { id, name, number }],
     }));
   };
 
   render() {
-    console.log(this.state.contacts);
+    // console.log(this.state.contacts);
     return (
       <>
         <h2>Phonebook</h2>
         <PhonebookForm onSubmit={this.handleSubmit} />
-        {this.state.contacts !== '' && (
-          <ContactList names={this.state.contacts} />
+        <h2>Contacts</h2>
+        <Filter />
+        {this.state.contacts.length > 0 ? (
+          <>
+            <ContactList options={this.state.contacts} />
+          </>
+        ) : (
+          'Sorry. Your phonebok is empty.'
         )}
         <GlobalStyle />
       </>
