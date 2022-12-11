@@ -1,16 +1,20 @@
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-export const Filter = () => {
-	return (
-	<input
-          type="text"
-          name="filter"
-        />
-	);
+import { Input, Label } from './Filter.styled';
+
+export const Filter = ({ onChange }) => {
+  const handleChange = e => {
+    const filter = e.target.value;
+    onChange(filter);
+  };
+  return (
+    <Label>
+      Find contacts by name
+      <Input type="text" name="filter" onChange={handleChange} />
+    </Label>
+  );
 };
 
-// Contact.propTypes = {
-// 	name: PropTypes.string.isRequired,
-// 	number: PropTypes.string.isRequired,
-// };
+Filter.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};

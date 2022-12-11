@@ -2,9 +2,10 @@ import { GlobalStyle } from './GlobalStyle';
 import { Component } from 'react';
 import 'modern-normalize';
 
-import { PhonebookForm } from './PhonebookForm/Phonebook';
+import { PhonebookForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
+import { Title } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -14,8 +15,7 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    // name: '',
-    // number: '',
+    filter: '',
   };
 
   handleSubmit = (name, number, id) => {
@@ -26,17 +26,30 @@ export class App extends Component {
     }));
   };
 
+  handleChange = filter => {
+    this.setState({ filter: filter });
+  };
+
+  deleteUser = userId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== userId),
+    }));
+  };
+
   render() {
-    // console.log(this.state.contacts);
     return (
       <>
-        <h2>Phonebook</h2>
+        <Title>Phonebook</Title>
         <PhonebookForm onSubmit={this.handleSubmit} />
-        <h2>Contacts</h2>
-        <Filter />
+        <Title>Contacts</Title>
+        <Filter onChange={this.handleChange} />
         {this.state.contacts.length > 0 ? (
           <>
-            <ContactList options={this.state.contacts} />
+            <ContactList
+              contacts={this.state.contacts}
+              filter={this.state.filter}
+              deleteUser={this.deleteUser}
+            />
           </>
         ) : (
           'Sorry. Your phonebok is empty.'
