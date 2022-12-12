@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.ul`
+export const Container = styled.li`
   display: flex;
 `;
 
-export const User = styled.li`
+export const User = styled.p`
   width: 300px;
   height: 20px;
   margin-bottom: 20px;
