@@ -2,8 +2,8 @@ import { GlobalStyle } from './GlobalStyle';
 import { Component } from 'react';
 import 'modern-normalize';
 
-import { PhonebookForm } from './ContactForm/ContactForm';
-import { ContactList } from './ContactList/ContactList';
+import { ContactForm } from './ContactForm/ContactForm';
+import { ContactsList } from './ContactsList/ContactsList';
 import { Filter } from './Filter/Filter';
 import { Title } from './App.styled';
 
@@ -26,8 +26,8 @@ export class App extends Component {
     }));
   };
 
-  handleChange = filter => {
-    this.setState({ filter: filter });
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   deleteUser = userId => {
@@ -36,18 +36,26 @@ export class App extends Component {
     }));
   };
 
+  filteredContact = () => {
+    return this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
+  };
+
   render() {
     return (
       <>
         <Title>Phonebook</Title>
-        <PhonebookForm onSubmit={this.handleSubmit} />
+        <ContactForm
+          onSubmit={this.handleSubmit}
+          contacts={this.state.contacts}
+        />
         <Title>Contacts</Title>
         <Filter onChange={this.handleChange} />
         {this.state.contacts.length > 0 ? (
           <>
-            <ContactList
-              contacts={this.state.contacts}
-              filter={this.state.filter}
+            <ContactsList
+              contacts={this.filteredContact()}
               deleteUser={this.deleteUser}
             />
           </>
