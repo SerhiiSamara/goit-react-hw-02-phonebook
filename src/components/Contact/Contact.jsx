@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Container, User, Button } from './Contact.styled';
 
 export const Contact = ({ name, number, id, deleteUser }) => {
-  // console.log(deleteUser)
   return (
     <Container>
       <User>
