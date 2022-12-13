@@ -19,7 +19,6 @@ export class ContactForm extends Component {
         .includes(form.elements.name.value)
     ) {
       alert(`${form.elements.name.value} is already in contacts.`);
-      form.reset();
       return;
     }
     const id = nanoid();
@@ -39,6 +38,7 @@ export class ContactForm extends Component {
           <Input
             type="text"
             name="name"
+            value={this.state.name}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
@@ -50,6 +50,7 @@ export class ContactForm extends Component {
           <Input
             type="tel"
             name="number"
+            value={this.state.number}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
